@@ -1,0 +1,30 @@
+.container {
+  max-width: 420px;
+  width: 100%;
+  margin: 30px auto;
+  padding: 20px;
+}
+.container-footer {
+  float: right;
+  margin-top: 30px;
+}
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+}
+.error-container {
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: var(--highlight-color);
+}
+.error-container b {
+  cursor: pointer;
+  color: var(--primary-color);
+}

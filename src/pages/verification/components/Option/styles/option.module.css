@@ -1,0 +1,16 @@
+.option-container {
+  transition: ease 0.2s background-color;
+  padding: 1.25rem;
+  background-color: white;
+}
+
+.option-container:hover {
+  background-color: var(--light-gray);
+}
+.option-container.focused {
+  background-color: var(--highlight-color);
+}
+.option-container.disabled {
+  opacity: 0.2;
+  background-color: white;
+}

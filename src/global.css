@@ -1,0 +1,8 @@
+* {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  --primary-color: #004e5f;
+  --highlight-color: #def7f7;
+  --light-gray: #f7f7f7;
+}
