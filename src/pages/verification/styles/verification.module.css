@@ -16,7 +16,7 @@
   width: 100px;
   height: 100px;
 }
-.error-container {
+.message-container {
   max-width: 420px;
   width: 100%;
   text-align: center;
@@ -24,7 +24,7 @@
   padding: 20px;
   background-color: var(--highlight-color);
 }
-.error-container b {
+.message-container b {
   cursor: pointer;
   color: var(--primary-color);
 }

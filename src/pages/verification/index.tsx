@@ -84,12 +84,18 @@ const VerificationPage: FC = () => {
     return <img className={s.loader} alt="Loading" src="/loader.gif" />;
   if (error)
     return (
-      <div className={s["error-container"]}>
+      <div className={s["message-container"]}>
         <p>
           Error, please{" "}
           <b onClick={refetch as MouseEventHandler}>click here </b>
           to try again
         </p>
+      </div>
+    );
+  if (data?.length === 0)
+    return (
+      <div className={s["message-container"]}>
+        <p>Sorry, there are no verification options available at this time!</p>
       </div>
     );
 
