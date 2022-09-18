@@ -1,19 +1,19 @@
 .button {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 40px;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-  text-align: center;
-  user-select: none;
+  border-radius: 4px;
   border: 1px solid transparent;
   border: solid 1px var(--primary-color);
-
-  position: relative;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 4px;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  letter-spacing: 0.4px;
+  line-height: 40px;
+  padding: 0 16px;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  transition: ease 0.2s background-color;
+  user-select: none;
 }
 
 .button.primary {
@@ -47,13 +47,16 @@
 
 .button:disabled {
   background-color: #e6ebf4;
-  color: #bdc0cf;
   border: none;
+  color: #bdc0cf;
   cursor: not-allowed;
 }
+.button.secondary:hover {
+  background-color: var(--highlight-color);
+}
 
-.button,
-.button:enabled:hover,
-.button:enabled:focus {
+.button.primary:hover,
+.button.primary:focus {
   filter: brightness(110%);
+  transition: ease 0.2s filter;
 }

@@ -1,30 +1,32 @@
 .container {
-  max-width: 420px;
-  width: 100%;
   margin: 30px auto;
+  max-width: 420px;
   padding: 20px;
+  width: 100%;
 }
 .container-footer {
-  float: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   margin-top: 30px;
 }
 .loader {
-  position: absolute;
+  height: 100px;
   left: 50%;
+  position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
   width: 100px;
-  height: 100px;
 }
 .message-container {
-  max-width: 420px;
-  width: 100%;
-  text-align: center;
-  margin: 30px auto;
-  padding: 20px;
   background-color: var(--highlight-color);
+  margin: 30px auto;
+  max-width: 420px;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
 }
 .message-container b {
-  cursor: pointer;
   color: var(--primary-color);
+  cursor: pointer;
 }
