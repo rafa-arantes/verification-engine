@@ -54,20 +54,22 @@ If there's no selected items at all, it should enable only the first one
 Implementation:
 
 ```
- const enabledOptions = useMemo(() => {
-    const optionNoSelectedIndex = selectedOptionsEntries.findIndex(
-      ([, optionAnswer]) => optionAnswer === NO_OPTION
+  const enabledOptions = useMemo(() => {
+    if (!selectedOptionsSorted) return;
+    const optionNoSelectedIndex = selectedOptionsSorted.findIndex(
+      ({ result }) => result === NO_OPTION
     );
 
     const hasOptionNoSelected = optionNoSelectedIndex !== -1;
+    const EXTRA_OPTION = 1;
 
     return data?.slice(
       0,
       (hasOptionNoSelected
         ? optionNoSelectedIndex
-        : selectedOptionsEntries.length) + 1
+        : selectedOptionsSorted.length) + EXTRA_OPTION
     );
-  }, [data, selectedOptionsEntries]);
+  }, [data, selectedOptionsSorted]);
 ```
 
 it uses `selectedOptionsEntries` because it's already memoized, having no need to redo the calculation just to get the values.

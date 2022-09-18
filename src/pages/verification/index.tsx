@@ -21,35 +21,41 @@ const VerificationPage: FC = () => {
     { staleTime: Infinity, refetchOnWindowFocus: false }
   );
 
-  const selectedOptionsEntries = useMemo(
-    () => Object.entries(selectedOptions),
-    [selectedOptions]
+  const selectedOptionsSorted = useMemo(
+    () =>
+      data
+        ?.filter((option) => Object.hasOwn(selectedOptions, option.id))
+        .map((option) => ({
+          checkId: option.id,
+          result: selectedOptions[option.id],
+        })),
+    [selectedOptions, data]
   );
 
   const enabledOptions = useMemo(() => {
-    const optionNoSelectedIndex = selectedOptionsEntries.findIndex(
-      ([, optionAnswer]) => optionAnswer === NO_OPTION
+    if (!selectedOptionsSorted) return;
+    const optionNoSelectedIndex = selectedOptionsSorted.findIndex(
+      ({ result }) => result === NO_OPTION
     );
 
     const hasOptionNoSelected = optionNoSelectedIndex !== -1;
+    const EXTRA_OPTION = 1;
 
     return data?.slice(
       0,
       (hasOptionNoSelected
         ? optionNoSelectedIndex
-        : selectedOptionsEntries.length) + 1
+        : selectedOptionsSorted.length) + EXTRA_OPTION
     );
-  }, [data, selectedOptionsEntries]);
+  }, [data, selectedOptionsSorted]);
 
-  const isSubmitDisabled = useMemo(
-    () =>
-      !selectedOptionsEntries.some(
-        ([, optionsOFlagbject]) =>
-          optionsOFlagbject === NO_OPTION ||
-          data?.length === selectedOptionsEntries.length
-      ),
-    [selectedOptionsEntries, data]
-  );
+  const isSubmitDisabled = useMemo(() => {
+    if (!selectedOptionsSorted) return;
+    return !selectedOptionsSorted.some(
+      ({ result }) =>
+        result === NO_OPTION || data?.length === selectedOptionsSorted.length
+    );
+  }, [selectedOptionsSorted, data]);
 
   const { focusedOptionIndex, setFocusedOptionIndex } = useKeyboardNavigation(
     enabledOptions,
@@ -64,13 +70,13 @@ const VerificationPage: FC = () => {
     };
 
   const handleSubmit = useCallback(() => {
-    const payload = selectedOptionsEntries.map(([id, result]) => ({
-      result: result ? "yes" : "no",
-      checkId: id,
-    }));
-
-    return submitCheckResults(payload);
-  }, [selectedOptionsEntries]);
+    return submitCheckResults(
+      selectedOptionsSorted!.map((x) => ({
+        ...x,
+        result: x.result ? "yes" : "no",
+      }))
+    );
+  }, [selectedOptionsSorted]);
 
   const { mutate, isLoading: isSubmitLoading } = useMutation(handleSubmit, {
     onSuccess: () => {

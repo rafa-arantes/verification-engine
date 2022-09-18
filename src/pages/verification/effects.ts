@@ -28,16 +28,18 @@ export const useKeyboardNavigation = (
       [ARROW_DOWN]: () =>
         focusedOptionIndex < options.length - 1 &&
         setFocusedOptionIndex(focusedOptionIndex + 1),
-      [DIGIT_ONE]: () =>
+      [DIGIT_ONE]: () => {
         setOptions({
           ...currentOptions,
           [options[focusedOptionIndex].id]: YES_OPTION,
-        }),
-      [DIGIT_TWO]: () =>
+        });
+      },
+      [DIGIT_TWO]: () => {
         setOptions({
           ...currentOptions,
           [options[focusedOptionIndex].id]: NO_OPTION,
-        }),
+        });
+      },
     }[key];
 
     mapKeyToEffect?.();
