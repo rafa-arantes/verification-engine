@@ -84,7 +84,7 @@ It has an `useEffect` that takes care of listening for `keydown` events, that fi
 
 This hook returns the inner useState value and state setter, so it can be used to track focus and programmatically focus an item.
 
-By default, the first item of the list is selected, to keep it unselected until the first item is selected by click, the solution is changing the type of `focusedOptionIndex` to `number | undefined` and initializing it as `undefined`. Then inside `handleKeyNavigation`, adding `|| focusedOptionIndex === undefined` to `if (!options) return` and finally adding focusedOptionIndex as an dependency to the `useEffect` that listens for `keydown`.
+By default, the first item of the list is focused, to keep it unfocused until the first item is selected by click, the solution is changing the type of `focusedOptionIndex` to `number | undefined` and initializing it as `undefined`. Then inside `handleKeyNavigation`, adding `|| focusedOptionIndex === undefined` to `if (!options) return` and finally adding focusedOptionIndex as an dependency to the `useEffect` that listens for `keydown`.
 
 ### Mouse Navigation
 
