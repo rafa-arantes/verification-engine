@@ -17,10 +17,9 @@ export const useKeyboardNavigation = (
   currentOptions: SelectedOptions,
   setOptions: React.Dispatch<SetStateAction<SelectedOptions>>
 ) => {
-  const [focusedOptionIndex, setFocusedOptionIndex] = useState<number>(0);
-
+  const [focusedOptionIndex, setFocusedOptionIndex] = useState<number | undefined>(undefined);
   const handleKeyNavigation = ({ key }: KeyboardEvent) => {
-    if (!options) return;
+    if (!options || focusedOptionIndex === undefined) return;
 
     const mapKeyToEffect = {
       [ARROW_UP]: () =>
@@ -48,7 +47,7 @@ export const useKeyboardNavigation = (
   useEffect(() => {
     window.addEventListener("keydown", handleKeyNavigation);
     return () => window.removeEventListener("keydown", handleKeyNavigation);
-  }, [options, handleKeyNavigation]);
+  }, [options, handleKeyNavigation, focusedOptionIndex, setFocusedOptionIndex]);
 
   return { focusedOptionIndex, setFocusedOptionIndex };
 };
